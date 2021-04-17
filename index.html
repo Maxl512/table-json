@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API</title>
+</head>
+<body>
+   <style>
+        *{
+            padding:0;
+            margin:0;
+            box-sizing:border-box;
+        }
+        body{
+            background-color:#000;
+        }
+        h1{
+            width:100%;
+            text-align:center;
+            background-color:#115;
+            color:#fff;
+            padding:2% 2%;
+            font-size:3.4vw;
+        }
+        table{
+            width:100%;
+            box-sizing:border-box;
+            border-collapse:collapse;
+        }
+        th{
+            padding:2%;
+            border-right:.5vw solid #aaa;
+            margin:none;
+            background-color:#112;
+            color:#ccc;
+            text-align:center;
+            font-size:2vw
+        }
+       
+        th:nth-child(1), th:nth-child(2){
+           width:15%;
+        }
+        th:nth-child(3){
+            width:50%;        }
+        th:nth-child(4){
+            width:20%;
+            border:none
+        }
+ 
+        tr:nth-child(even){
+            color:#333;
+            background-color:#aaa;
+        }
+        tr:nth-child(odd){
+            color:#ccc;
+            background-color:#224;
+        }
+        tr:nth-child(even) > td{
+            border-right:2px solid #ccc;
+        }
+        tr:nth-child(odd) > td{
+            border-right:2px solid #555;
+        }
+        td{
+            padding:2%;
+            text-align:center;
+            font-size:1.5vw;
+        }
+        td:nth-child(1), td:nth-child(2){
+           width:15%;
+        }
+        td:nth-child(3){
+            width:50%;
+        }
+        td:nth-child(4){
+            width:20%;
+            border:none;
+        }
+   </style>
+    <h1>Tabla</h1>
+    <table id="table">
+        <thead>
+              <th>UserId</th>
+              <th>Id</th>
+              <th>Title</th>
+              <th>Completed</th>
+        </thead>
+    </table>
+    <script>
+        fetch('https://jsonplaceholder.typicode.com/todos')
+        .then(response => response.json())
+        .then(json => {
+            console.log(json);
+            for (object in json){
+                let table = document.querySelector("#table");
+                let tr = document.createElement("TR");
+
+                let tdUI = document.createElement("TD");
+                tdUI.appendChild(document.createTextNode(json[object].userId));
+                let tdI = document.createElement("TD");
+                tdI.appendChild(document.createTextNode(json[object].id));
+                let tdT = document.createElement("TD");
+                tdT.appendChild(document.createTextNode(json[object].title));
+                let tdC = document.createElement("TD");
+                tdC.appendChild(document.createTextNode(json[object].completed));
+
+                tr.appendChild(tdUI);
+                tr.appendChild(tdI);
+                tr.appendChild(tdT);
+                tr.appendChild(tdC);
+
+                table.appendChild(tr);
+            };
+        });
+    </script>
+</body>
+</html>
